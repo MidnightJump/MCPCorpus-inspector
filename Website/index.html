@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCPZoo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-network-wired"></i>
+                    <span>MCPZoo</span>
+                </div>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item active" data-page="dashboard">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>Dashboard</span>
+                </li>
+                <li class="nav-item" data-page="search">
+                    <i class="fas fa-search"></i>
+                    <span>Search</span>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Dashboard Page -->
+            <div id="dashboard" class="page active">
+                <header class="page-header">
+                    <h1>MCPZoo Dashboard</h1>
+                    <p>Explore the Model Context Protocol ecosystem</p>
+                </header>
+
+                <!-- Stats Grid -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon clients">
+                            <i class="fas fa-desktop"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-number" id="clients-count">0</div>
+                            <div class="stat-label">Clients</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon servers">
+                            <i class="fas fa-server"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-number" id="servers-count">0</div>
+                            <div class="stat-label">Servers</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon categories">
+                            <i class="fas fa-tags"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-number" id="categories-count">0</div>
+                            <div class="stat-label">Categories</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon stars">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-number" id="stars-count">0</div>
+                            <div class="stat-label">Total Stars</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts -->
+                <div class="charts-container">
+                    <div class="chart-card">
+                        <h3>Category Distribution</h3>
+                        <canvas id="categoryChart"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <h3>Programming Languages</h3>
+                        <canvas id="languageChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Top Projects -->
+                <div class="top-projects">
+                    <h3>Top Projects by Stars</h3>
+                    <div class="projects-list" id="top-projects"></div>
+                </div>
+            </div>
+
+            <!-- Search Page -->
+            <div id="search" class="page">
+                <header class="page-header">
+                    <h1>Search Projects</h1>
+                    <p>Find MCP clients and servers</p>
+                </header>
+
+                <!-- Search Controls -->
+                <div class="search-controls">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="search-input" placeholder="Search by name, description, or author...">
+                    </div>
+                    <div class="filters">
+                        <select id="type-filter">
+                            <option value="">All Types</option>
+                            <option value="client">Clients</option>
+                            <option value="server">Servers</option>
+                        </select>
+                        <select id="category-filter">
+                            <option value="">All Categories</option>
+                        </select>
+                        <select id="language-filter">
+                            <option value="">All Languages</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Results -->
+                <div class="search-results">
+                    <div class="results-header">
+                        <span id="results-count">0 results</span>
+                        <div class="view-toggle">
+                            <button class="view-btn active" data-view="grid">
+                                <i class="fas fa-th"></i>
+                            </button>
+                            <button class="view-btn" data-view="list">
+                                <i class="fas fa-list"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="results-grid" id="search-results"></div>
+                    
+                    <!-- Pagination -->
+                    <div class="pagination-container" id="pagination-container">
+                        <div class="pagination">
+                            <button class="page-btn prev-btn" id="prev-btn">
+                                <i class="fas fa-chevron-left"></i>
+                                Previous
+                            </button>
+                            <div class="page-numbers" id="page-numbers"></div>
+                            <button class="page-btn next-btn" id="next-btn">
+                                Next
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                        <div class="pagination-info">
+                            <span id="pagination-info">Showing 1-20 of 100</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Project Modal -->
+    <div id="project-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title"></h2>
+                <button class="modal-close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="modal-body"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
