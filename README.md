@@ -58,13 +58,4 @@ cd ../Clients && python Client_request.py
 cd .. && python github_info_collector.py --token YOUR_GITHUB_TOKEN
 ```
 
-## 📖 Citation
 
-```bibtex
-@dataset{mcpcorpus2024,
-  title={MCPCorpus: A Large-Scale Evolvable Dataset for Model Context Protocol Ecosystem and Security Analysis},
-  author={Zhiwei Lin and Bonan Ruan and Jiahao Liu and Weibo Zhao and Zhenkai Liang},
-  year={2024},
-  institution={National University of Singapore}
-}
-```
