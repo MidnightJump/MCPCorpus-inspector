@@ -58,4 +58,17 @@ cd ../Clients && python Client_request.py
 cd .. && python github_info_collector.py --token YOUR_GITHUB_TOKEN
 ```
 
+📚 Citation
+If you use MCPCorpus in your research, please cite it as:
+```
+@misc{lin2025largescaleevolvabledatasetmodel,
+      title={A Large-Scale Evolvable Dataset for Model Context Protocol Ecosystem and Security Analysis}, 
+      author={Zhiwei Lin and Bonan Ruan and Jiahao Liu and Weibo Zhao},
+      year={2025},
+      eprint={2506.23474},
+      archivePrefix={arXiv},
+      primaryClass={cs.CR},
+      url={https://arxiv.org/abs/2506.23474}, 
+}
+```
 
