@@ -14,13 +14,15 @@
 ```
 MCPCorpus/
 ├── Crawler/                    # Data collection tools
-│   ├── Servers/               # Server data (mcpso_servers_cleaned.json)
-│   ├── Clients/               # Client data (mcpso_clients_cleaned.json)
+│   ├── Servers/               # Server data
+│   ├── Clients/               # Client data
 │   ├── github_info_collector.py  # GitHub metadata collector
 │   └── data_cleaner.py        # Data normalization
 └── Website/                   # Web search interface
     ├── server.py              # Local web server
     └── index.html             # Search interface
+    └── mcpso_servers_cleaned.json
+    └── mcpso_clients_cleaned.json
 ```
 
 ## 🚀 Quick Start
