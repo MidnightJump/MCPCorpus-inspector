@@ -17,7 +17,8 @@ MCPCorpus/
 │   ├── Servers/               # Server data
 │   ├── Clients/               # Client data
 │   ├── github_info_collector.py  # GitHub metadata collector
-│   └── data_cleaner.py        # Data normalization
+|   ├── data_cleaner.py        # Data normalization 
+│   └── tool_extractor.py      # mcp tool extract
 └── Website/                   # Web search interface
     ├── server.py              # Local web server
     └── index.html             # Search interface
