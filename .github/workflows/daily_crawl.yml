@@ -1,0 +1,53 @@
+name: Daily MCP Inspector Crawl
+
+on:
+  schedule:
+    - cron: '0 18 * * *' # Daily at 18:00 UTC (adjust as needed)
+  workflow_dispatch:
+
+jobs:
+  crawl:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install inspector dependency cache prime
+        run: |
+          npm -v
+          node -v
+          npx -y @modelcontextprotocol/inspector --help || true
+
+      - name: Run crawl script (limited)
+        env:
+          CRAWL_LIMIT: '150'
+          CRAWL_TIMEOUT_SEC: '30'
+        run: |
+          python -V
+          python3 scripts/crawl_inspector.py
+
+      - name: Commit and push changes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/tools.json
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: daily MCP tools crawl"
+            git push
+          else
+            echo "No changes to commit."
+          fi
+
