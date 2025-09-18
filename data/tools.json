@@ -1,0 +1,142 @@
+[
+  {
+    "server_name": "edgeone-pages-mcp",
+    "repo_url": "https://github.com/TencentEdgeOne/edgeone-pages-mcp",
+    "transport": "stdio",
+    "source": "server_config",
+    "tools": [
+      {
+        "name": "deploy_html",
+        "description": "Deploy HTML content to EdgeOne Pages, return the public URL",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "value": {
+              "type": "string",
+              "description": "Provide the full HTML markup you wish to publish.\nAfter deployment, the system will generate and return a public URL where your content can be accessed."
+            }
+          },
+          "required": [
+            "value"
+          ],
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        }
+      },
+      {
+        "name": "deploy_folder_or_zip",
+        "description": "Deploy a built frontend directory (or zip file) to EdgeOne Pages. Returns: the deployment URL and project metadata.",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "builtFolderPath": {
+              "type": "string",
+              "description": "Provide the absolute path to the built frontend folder(or zip file) you wish to deploy."
+            }
+          },
+          "required": [
+            "builtFolderPath"
+          ],
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        }
+      }
+    ],
+    "status": "ok",
+    "error": null
+  },
+  {
+    "server_name": "time",
+    "repo_url": "https://github.com/modelcontextprotocol/servers/tree/main/src/time",
+    "transport": "stdio",
+    "source": "server_config",
+    "tools": [],
+    "status": "error",
+    "error": "Failed to connect to MCP server: spawn uvx ENOENT\n\nFailed with exit code: 1"
+  },
+  {
+    "server_name": "aiimagemultistyle",
+    "repo_url": "https://github.com/codecraftm/aiimagemultistyle",
+    "transport": "stdio",
+    "source": "server_config",
+    "tools": [],
+    "status": "error",
+    "error": "Failed to connect to MCP server: MCP error -32000: Connection closed\n\nFailed with exit code: 1"
+  },
+  {
+    "server_name": "zhipu-web-search",
+    "repo_url": "https://github.com/THUDM",
+    "transport": "sse",
+    "source": "server_config",
+    "tools": [],
+    "status": "error",
+    "error": "Command is required.\n\nFailed with exit code: 1"
+  },
+  {
+    "server_name": "mcpadvisor",
+    "repo_url": "https://github.com/istarwyh/mcpadvisor",
+    "transport": "stdio",
+    "source": "server_config",
+    "tools": [
+      {
+        "name": "recommend-mcp-servers",
+        "description": "\n        此工具用于寻找合适且专业MCP服务器。\n        基于您的具体需求，从互联网资源库以及内部MCP库中筛选并推荐最适合的MCP服务器解决方案。\n        返回结果包含服务器名称、功能描述、所属类别，为您的业务成功提供精准技术支持。\n      ",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "taskDescription": {
+              "type": "string",
+              "description": "\n              请提供所需MCP服务器的精确任务描述。\n              \n              有效查询示例：\n              - '用于风控策略部署的MCP服务器'\n              - '保险产品精算定价的MCP服务器'\n              \n              无效查询示例：\n              - '保险MCP服务器'（过于宽泛）\n              - '风控系统'（缺乏具体保险场景）\n              - '精算工具'（未指明具体功能需求）\n              \n              查询应明确指定：\n              1. 业务流程（如产品定价、核保、理赔、准备金计算等）\n              2. 具体功能需求（如风险分析、策略部署、策略研发、特征研发等）\n            "
+            },
+            "keywords": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "当前任务对应的搜索关键词列表，当提供关键词会优先对 MCP Server 筛选",
+              "default": []
+            },
+            "capabilities": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "当前任务所需功能列表，当提供功能列表会综合任务描述和功能列表对 MCP Server 筛选",
+              "default": []
+            }
+          },
+          "required": [
+            "taskDescription"
+          ]
+        }
+      },
+      {
+        "name": "install-mcp-server",
+        "description": "\n        此工具用于安装MCP服务器。\n        请告诉我您想要安装哪个 MCP 以及其 githubUrl，我将会告诉您如何安装对应的 MCP，\n        并指导您在不同AI助手环境中正确配置MCP服务器。\n      ",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "mcpName": {
+              "type": "string",
+              "description": "请输入您想要安装的MCP名称。"
+            },
+            "githubUrl": {
+              "type": "string",
+              "description": "请输入您想要安装的MCP的githubUrl。"
+            },
+            "mcpClient": {
+              "type": "string",
+              "description": "可选，请指定您使用的MCP客户端（如Claude Desktop、Windsurf、Cursor、Cline等）。不同客户端的配置方式可能不同。"
+            }
+          },
+          "required": [
+            "mcpName",
+            "githubUrl"
+          ]
+        }
+      }
+    ],
+    "status": "ok",
+    "error": null
+  }
+]
